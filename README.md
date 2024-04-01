@@ -2,7 +2,7 @@
 ## 0. Purpose
 This is a web scraper to obtain KRGDB allele frequency for target SNPs from dbSNP.
 
-## 1. 개발 동기
+## 1. Motivation
 Accessing the KRGDB database directly is currently not feasible. Therefore, it needs to be indirectly checked through dbSNP.
 
 However, when using the Entrez Programming Utilities provided by NCBI, there is an issue where some allele frequencies are not available.
