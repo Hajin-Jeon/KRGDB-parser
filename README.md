@@ -41,7 +41,7 @@ ALT and ALT frequency can be shown multiple times.
 ### 3-2. Example Case
 Example 1:
 - Input: `python krgdb_parser.py rs12732870`
-- Output: `rs12732870	2920	T	0.8192	A 0.0301	G 0.1507`
+- Output: `rs12732870	2920	T	0.8192	A	0.0301	G	0.1507`
 
 
 Example 2 (Using tags):
@@ -56,9 +56,9 @@ rs34936017
 ```
 - Output file `result.txt`:
 ```
-rs200949691	2930	C	0.9799	G 0.0201
+rs200949691	2930	C	0.9799	G	0.0201
 
-rs141265262	2922	C	0.9849	T 0.0151
-rs72648929	2922	C	0.9610	T 0.0390
-rs34936017	2922	A	0.9846	G 0.0154
+rs141265262	2922	C	0.9849	T	0.0151
+rs72648929	2922	C	0.9610	T	0.0390
+rs34936017	2922	A	0.9846	G	0.0154
 ```
