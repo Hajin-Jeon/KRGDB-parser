@@ -22,10 +22,12 @@ pip install beautifulsoup4
 ### 2-2. How to use
 The basic usage is as follows:
 ```bash
-python krgdb_parser.py [OPTION] (file or rs_id)
+python krgdb_parser.py [-h] [-b] [-o OUTPUT] input_arg
 ```
 Options are as follows:
-- `b, --batch`: Accepts a file containing multiple rs ids as input.
+- `-h, --help`: show the help message
+- `-b, --batch`: process in batch mode
+- `-o OUTPUT, --output OUTPUT`: output file to write results to.
 
 ## 3. Sample input and output
 ### 3-1. Output format
@@ -42,3 +44,23 @@ ALT and ALT frequency can be shown multiple times.
 Here's an example case:
 - Input: `python krgdb_parser.py rs12732870`
 - Output: `rs12732870	2920	T	0.8192	A 0.0301	G 0.1507`
+
+
+Here's another example that using tags:
+- Input: `python krgdb_parser.py -b -o result.txt file.txt`
+- Input file `file.txt`:
+```
+rs200949691
+rs141478865
+rs141265262
+rs72648929
+rs34936017
+```
+- Output file `result.txt`:
+```
+rs200949691	2930	C	0.9799	G 0.0201
+
+rs141265262	2922	C	0.9849	T 0.0151
+rs72648929	2922	C	0.9610	T 0.0390
+rs34936017	2922	A	0.9846	G 0.0154
+```
