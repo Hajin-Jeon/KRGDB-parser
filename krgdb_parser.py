@@ -47,7 +47,7 @@ def parse_html(rs_id, html_doc, output_file=None):
                 if frequencies:
                     ref, ref_freq = frequencies[0]
                     alts = frequencies[1:]
-                    alt_str = '\t'.join([f"{allele} {freq}" for allele, freq in alts])
+                    alt_str = '\t'.join([f"{allele}\t{freq}" for allele, freq in alts])
                     result_line = f"{rs_id}\t{sample_size}\t{ref}\t{ref_freq}\t{alt_str}"
                     results.append(result_line)
     
