@@ -26,10 +26,13 @@ Options:
 - `-h, --help`: show the help message
 - `-b, --batch`: process in batch mode
 - `-o OUTPUT, --output OUTPUT`: output file to write results to.
+- `--store`: store every html files in current directory
 
 ## 3. Sample Input and Output
 ### 3-1. Output Format
 - `rs_id`: name of the rs
+- `position`: position of the variant
+- `version`: reference version info
 - `population_size`: size of the population (of KRGDB)
 - `REF`: reference allele
 - `REF frequency`: allele frequency of the reference allele

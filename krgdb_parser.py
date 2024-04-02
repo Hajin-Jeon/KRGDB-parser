@@ -6,12 +6,15 @@ import sys
 import time
 from bs4 import BeautifulSoup
 
-def download_html(rs_id):
+def download_html(rs_id, store=False):
     url = f"https://www.ncbi.nlm.nih.gov/snp/{rs_id}"
     time.sleep(0.2)  # NCBI allows 3 requests per second
     try:
         response = requests.get(url)
         response.raise_for_status()
+        if store:
+            with open(f"{rs_id}", 'w', encoding='utf-8') as file:
+                file.write(response.text)
         return response.text
     except requests.exceptions.RequestException as e:
         print(f"Error fetching {url}: {e}")
@@ -84,9 +87,9 @@ def check_merge(html_content, rs_id):
     return rs_id
 
 
-def process_single_rs(rs_id, output_file=None):
+def process_single_rs(rs_id, output_file=None, store=False):
     if not os.path.exists(rs_id):
-        html_content = download_html(rs_id)
+        html_content = download_html(rs_id, store)
     else:
         with open(rs_id, 'r', encoding='utf-8') as file:
             html_content = file.read()
@@ -101,14 +104,14 @@ def process_single_rs(rs_id, output_file=None):
             else:
                 print(f"{rs_id}\tUnsupported")
         else:
-            process_single_rs(new_rs, output_file)
+            process_single_rs(new_rs, output_file, store)
 
-def process_rs_file(input_arg, output_file=None):
+def process_rs_file(input_arg, output_file=None, store=False):
     with open(input_arg, 'r', encoding='utf-8') as file:
         for rs_id in file:
             rs_id = rs_id.strip()
             if rs_id:
-                process_single_rs(rs_id, output_file)
+                process_single_rs(rs_id, output_file, store)
 
 def check_output_file_writable(output_file):
     if output_file:
@@ -124,15 +127,16 @@ def main():
     parser.add_argument("input_arg", help="input file name or rs ID")
     parser.add_argument("-b", "--batch", action="store_true", help="process in batch mode")
     parser.add_argument("-o", "--output", help="output file to write results to.", default=None)
+    parser.add_argument("--store", action="store_true", help="Save fetched HTML content to file named {rs_id}.")
 
     args = parser.parse_args()
 
     check_output_file_writable(args.output)
 
     if args.batch and os.path.exists(args.input_arg):
-        process_rs_file(args.input_arg, args.output)
+        process_rs_file(args.input_arg, args.output, args.store)
     elif re.match(r'^rs\d+$', args.input_arg):
-        process_single_rs(args.input_arg, args.output)
+        process_single_rs(args.input_arg, args.output, args.store)
     else:
         print(f"Invalid input or file not found: {args.input_arg}")
 
