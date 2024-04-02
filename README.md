@@ -7,7 +7,7 @@ Accessing the KRGDB database directly is currently not feasible. Therefore, it n
 
 However, when using the Entrez Programming Utilities provided by NCBI, there is an issue where some allele frequencies are not available.
 
-(Example: For https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=snp&id=rs761437962&report=XML, only allele frequency for C in the KOREAN study is shown.)
+(Example: For https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=snp&id=rs761437962&report=XML, only allele frequency for C in the KOREAN study is shown, not for A or T.)
 
 To overcome this, I decided to directly read the dbSNP website and parse the html file.
 
